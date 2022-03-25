@@ -42,7 +42,9 @@ function openPost(link) {
     loadData('/API/text/list', (data) => {
         data = data.split(',');
         for (n of data) {
-            document.getElementById('newsList').innerHTML += `<h2 onclick="openPost('/API/text/${n}')">${n}</h2><br>`
+            document.getElementById('newsList').innerHTML = 
+                `<h2 style="cursor: pointer;" onclick="openPost('/API/text/${n}')">${n}</h2><br>` + 
+                document.getElementById('newsList').innerHTML;
         }
         innerHTMLtemp = document.getElementById('newsList').innerHTML;
         if (window.location.hash.indexOf('#id') == 0) 
