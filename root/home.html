@@ -8,7 +8,7 @@
         .post {
             /* background: var(--color-cyan); */
             border: 1px solid var(--color-cyan);
-            padding: 5px 5px 5px 5px;
+            padding: 1em 1em;
         }
     </style>
 </head>
@@ -38,6 +38,7 @@
                 if (!data[n].indexOf('[News')) style = 'hl';
                 else if (!data[n].indexOf('[IRL')) style = 'red';
                 else if (!data[n].indexOf('[General')) style = 'cyan';
+                else if (!data[n].indexOf('[Topic')) style = 'green';
                 document.getElementById('newsList').innerHTML = 
                     `<div class="post" style="cursor: pointer;" onclick="openPost('/API/text/${data[n]}')"><h2 style="color: var(--color-${style})">${data[n]}</h2><p id="post${n}"></p></div>`
                     + document.getElementById('newsList').innerHTML;

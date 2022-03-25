@@ -5,11 +5,7 @@
     <title>Bayer News</title>
     <link rel="stylesheet" href="/API/asset/style.css">
     <style>
-        .post {
-            /* background: var(--color-cyan); */
-            border: 1px solid var(--color-cyan);
-            padding: 5px 5px 5px 5px;
-        }
+
     </style>
 </head>
 <body>
@@ -17,11 +13,22 @@
     <!-- <img src="/API/res/cover.png" alt="Cover" style="width: 80vw;"> -->
     <a onclick="document.getElementById('newsList').innerHTML = innerHTMLtemp">Back</a>
     <main>
-
+        <p>Warning: new line will be automatically convert into <code>&#60;br&#62;</code></p>
+        <input id="pName" name="Post title">
+        <textarea id="content" style="width: 80vw;" rows="50">Your post content (in HTML)</textarea>
+        <Button onclick="submit()">Submit</Button>
     </main>
 </body>
 <script src="/API/asset/script.js"></script>
 <script>
-
+    function submit() {
+        let data = {
+            pName: document.getElementById('pName').value,
+            content: document.getElementById('content').value
+        }
+        sendData('/API/new/post', JSON.stringify(data) , () => {
+            window.location.href = "/"
+        })
+    }
 </script>
 <html>

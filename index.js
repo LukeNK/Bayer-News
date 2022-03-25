@@ -19,7 +19,7 @@ let server = http.createServer((req, res) => {
     if (req.url == '/') getFile('./root/home.html', res);
     else if (!req.url.indexOf('/API/asset/')) getFile('.' + req.url, res);
     else if (!req.url.indexOf('/API/res/')) getFile('.' + req.url, res);
-    // else if (req.url.indexOf('/API/text/count') == 0) fs.readdir('./API/text/', (err, f) => {res.write(f.length); res.end()});
+    else if (req.url.indexOf('/API/text/count') == 0) fs.readdir('./API/text/', (err, f) => {res.write(f.length -1); res.end()});
     else if (req.url == '/API/text/list') {
         fs.readFile('API/text/list', 'utf-8', (err, data) => {
             data = data.replace(/\n/g, ',')
@@ -32,12 +32,19 @@ let server = http.createServer((req, res) => {
         getFile('.' + a, res);
     }
     else if (req.url.indexOf('/comp/') == 0) getFile('.' + req.url, res);
-    else if (!req.url.indexOf('/API/new/post/') {
+    else if (req.url == '/new/post') getFile('./root/writer.html', res);
+    else if (!req.url.indexOf('/API/new/post')) {
         let data = ''
         req.on('data', c => data += c);
         req.on('end', () => {
+            req.url = req.url.split('/')
             data = JSON.parse(data)
-            // fs.writefile('./API/')
+            fs.writeFile(`./API/text/${data.pName}`, data.content, 'utf8', (err) => {
+                fs.appendFile('./API/text/list', `\n${data.pName}`, 'utf8', (err) => {
+                    res.write('okay')
+                    res.end()
+                })
+            });
         })
     }
 });
