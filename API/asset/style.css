@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+:root {
+    --color-bg: #1b1b1eff;
+    --color-fr: #fbfffeff;
+    --color-cyan: #007aff;
+    --color-highlight: #faa916ff;
+    --color-light: #6d676eff;
+    --color-red: #96031aff;
+}
+body {
+    padding-left: 10vw;
+    padding-right: 10vw;
+    background-color: var(--color-bg);
+    color: var(--color-fr);
+    font-family: 'Montserrat', sans-serif;
+}
+h1, h2, h3 {
+    color: var(--color-light);
+    font-family: 'Comfortaa', cursive;
+}
+a {
+    color: var(--color-cyan);
+    text-decoration: none;
+}
+a:hover, button:hover {
+    cursor: pointer;
+}
