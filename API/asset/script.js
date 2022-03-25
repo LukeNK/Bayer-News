@@ -19,13 +19,6 @@ function sendData(target, data, callback) {
     xhttp.send(data);
 }
 
-function openPost(link) {
-    loadData(link, data => {
-        innerHTMLtemp = document.getElementById('newsList').innerHTML;
-        document.getElementById('newsList').innerHTML = data;
-    })
-}
-
 (function() {
     // load all of components
     let divs = document.getElementsByTagName('div');
@@ -37,17 +30,3 @@ function openPost(link) {
         })
     }
 })();
-
-(function() {
-    loadData('/API/text/list', (data) => {
-        data = data.split(',');
-        for (n of data) {
-            document.getElementById('newsList').innerHTML = 
-                `<h2 style="cursor: pointer;" onclick="openPost('/API/text/${n}')">${n}</h2><br>` + 
-                document.getElementById('newsList').innerHTML;
-        }
-        innerHTMLtemp = document.getElementById('newsList').innerHTML;
-        if (window.location.hash.indexOf('#id') == 0) 
-            openPost('/API/text/' + data[window.location.hash.substring(3)]);
-    })
-})()

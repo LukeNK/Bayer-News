@@ -4,15 +4,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bayer News</title>
     <link rel="stylesheet" href="/API/asset/style.css">
-    <style></style>
+    <style>
+        .post {
+            /* background: var(--color-cyan); */
+            border: 1px solid var(--color-cyan);
+            padding: 5px 5px 5px 5px;
+        }
+    </style>
 </head>
 <body>
     <div id="comp-navbar"></div>
     <!-- <img src="/API/res/cover.png" alt="Cover" style="width: 80vw;"> -->
-    <a href="/">Back</a>
+    <a onclick="document.getElementById('newsList').innerHTML = innerHTMLtemp">Back</a>
     <main>
+        <p><b>Tags explaination:</b> "News" means update of an event, "General" total coverage of events happen inside/outside Bayer Free State, "IRL" important news in real life, "Topic" mean posts about specific thing.</p>
         <div id="newsList"></div>
     </main>
 </body>
 <script src="/API/asset/script.js"></script>
+<script>
+    function openPost(link) {
+        loadData(link, data => {
+            innerHTMLtemp = document.getElementById('newsList').innerHTML;
+            document.getElementById('newsList').innerHTML = data.replace(/\n/g, '<br>');
+        })
+    }
+    (function() {
+        loadData('/API/text/list', data => {
+            data = data.split(',');
+            for (n in data) {
+                const m = n; // Scope temp
+                let style = '';
+                if (!data[n].indexOf('[News')) style = 'hl';
+                else if (!data[n].indexOf('[IRL')) style = 'red';
+                else if (!data[n].indexOf('[General')) style = 'cyan';
+                document.getElementById('newsList').innerHTML = 
+                    `<div class="post" style="cursor: pointer;" onclick="openPost('/API/text/${data[n]}')"><h2 style="color: var(--color-${style})">${data[n]}</h2><p id="post${n}"></p></div>`
+                    + document.getElementById('newsList').innerHTML;
+                loadData(`/API/text/${data[m]}`, content => {
+                    content = content.split(/ /g, 51);
+                    content = content.slice(0, 50);
+                    content = content.join(' ');
+                    document.getElementById(`post${m}`).innerHTML = content + '...';
+                })
+            }
+            innerHTMLtemp = document.getElementById('newsList').innerHTML;
+            if (window.location.hash.indexOf('#id') == 0) 
+                openPost('/API/text/' + data[window.location.hash.substring(3)]);
+        })
+    })()
+</script>
 <html>
