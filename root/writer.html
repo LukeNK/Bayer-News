@@ -3,7 +3,11 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bayer News</title>
-    <link rel="stylesheet" href="/API/asset/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/API/asset/style.css">
     <style>
 
     </style>
@@ -14,7 +18,7 @@
     <a onclick="document.getElementById('newsList').innerHTML = innerHTMLtemp">Back</a>
     <main>
         <p>Warning: new line will be automatically convert into <code>&#60;br&#62;</code></p>
-        <input id="pName" name="Post title">
+        <input id="pName" value="Post title">
         <textarea id="content" style="width: 80vw;" rows="50">Your post content (in HTML)</textarea>
         <Button onclick="submit()">Submit</Button>
     </main>

@@ -15,10 +15,13 @@ function getFile(path, res) {
 }
 
 let server = http.createServer((req, res) => {
-    console.log(req.url)
+    // console.log(req.url)
     if (req.url == '/') getFile('./root/home.html', res);
-    else if (!req.url.indexOf('/API/asset/')) getFile('.' + req.url, res);
-    else if (!req.url.indexOf('/API/res/')) getFile('.' + req.url, res);
+    else if ((!req.url.indexOf('/API/asset/'))
+        || (!req.url.indexOf('/API/res/')) 
+        || (!req.url.indexOf('/API/image/')) 
+        || (!req.url.indexOf('/comp/'))) 
+        getFile('.' + req.url, res);
     else if (req.url.indexOf('/API/text/count') == 0) fs.readdir('./API/text/', (err, f) => {res.write(f.length -1); res.end()});
     else if (req.url == '/API/text/list') {
         fs.readFile('API/text/list', 'utf-8', (err, data) => {
@@ -31,7 +34,6 @@ let server = http.createServer((req, res) => {
         let a = req.url.replace(RegExp('%20', 'g'), ' ');
         getFile('.' + a, res);
     }
-    else if (req.url.indexOf('/comp/') == 0) getFile('.' + req.url, res);
     else if (req.url == '/new/post') getFile('./root/writer.html', res);
     else if (!req.url.indexOf('/API/new/post')) {
         let data = ''

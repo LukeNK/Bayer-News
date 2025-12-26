@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 :root {
     /* https://coolors.co/1b1b1e-fbfffe-007aff-faa916-6d676e-96031a */
     --color-bg: #1b1b1eff;
     --color-fr: #fbfffeff;
     --color-cyan: #007aff;
     --color-hl: #faa916ff;
+    --color-dl: #292929ff;
     --color-light: #6d676eff;
     --color-red: #96031aff;
     --color-green: #04E762;
@@ -27,4 +26,10 @@ a {
 }
 a:hover, button:hover {
     cursor: pointer;
+}
+textarea {
+    color: var(--color-fr);
+    background: var(--color-dl);
+    outline: none;
+    border: 0px none;
 }
